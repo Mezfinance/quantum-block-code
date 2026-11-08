@@ -4,20 +4,25 @@ Context for any new Claude Code session working in this repo. **Read this first,
 
 ## Project goal
 
-Build our own open-source terminal coding agent (a Claude Code–style CLI) using open-weight LLMs and open tooling. Every dependency must stay free to use permanently, and hosting must not depend on any single free tier.
+Build and sell a browser-based AI coding agent (a hosted Claude Code–style product) using open-weight LLMs and open tooling. Every component must be licensed for commercial use with no fees or revenue caps, and hosting must not depend on any single vendor or free tier.
 
 ## Current status (2026-11-08)
 
-- Repo was empty; the first commit adds research only. No code yet.
+- Research only so far; no code yet. Next step is Phase 1 of report 03 (prototype).
 - Research report: `docs/research/01-open-source-coding-agent.md`
 - Commercial licensing check: `docs/research/02-commercial-licensing.md`. **The product will be sold**, so every component must allow commercial use.
+- Browser product recommendation: `docs/research/03-browser-product-recommendation.md`. **The product is browser-based** (hosted SaaS), and this is the current plan of record.
 
-## Key decisions so far (from the research)
+## Key decisions so far (plan of record, see report 03)
 
-- **Harness:** fork OpenCode (MIT) or build our own harness modelled on mini-swe-agent (MIT). Decision still open.
-- **Models:** Apache-2.0 open weights only by default: Qwen3-Coder-30B-A3B, Devstral Small 2 (24B), Qwen3-Coder-Next (80B/3B active).
-- **Training:** LoRA SFT with Unsloth on permissively licensed trajectory datasets (SWE-smith, CoderForge-Preview, NVIDIA SWE-ZERO / Open-SWE-Traces). RL (SkyRL / verl) is a later, paid-compute phase.
-- **Hosting:** code on GitHub, weights/datasets on Hugging Face Hub, inference local-first (Ollama / llama.cpp / vLLM). Harness must speak any OpenAI-compatible API so free cloud endpoints (OpenRouter, Groq) are optional fallbacks.
+- **Product shape:** browser-based paid SaaS. Thin browser client; agent and code run server-side.
+- **Browser UI:** our own web app with Monaco (editor) and xterm.js (terminal). Do not reuse OpenCode's web UI (it proxies to app.opencode.ai, and the name is their trademark).
+- **Agent engine:** fork of **OpenCode (MIT, TypeScript)**, renamed, run as `opencode serve` inside each user's sandbox. OpenHands rejected: its multi-tenant/enterprise features are Polyform-licensed.
+- **Sandbox:** **E2B** (Apache-2.0, Firecracker microVMs). Managed cloud for MVP, self-host later. Rejected: WebContainers (paid commercial licence), Daytona (closed/AGPL), Pyodide (MPL-2.0, Python-only).
+- **Models:** **Qwen3-Coder-30B-A3B** default, **Qwen3-Coder-Next** premium (both Apache-2.0), served with **vLLM**. In-browser WebLLM only as a possible later "offline lite" mode.
+- **GPU hosting:** serverless scale-to-zero (Modal/RunPod) at launch, dedicated GPUs once utilisation passes ~40%. Offer bring-your-own-model for a cheap tier.
+- **Training:** LoRA SFT with Unsloth on SWE-smith, SWE-Gym, SWE-rebench and NVIDIA SWE sets (MIT / CC BY 4.0). RL (SkyRL / verl) is a later, paid-compute phase.
+- **Storage:** code on GitHub; weights/datasets on Hugging Face Hub (private for our fine-tunes) with a mirror.
 
 ## Hard rules
 
@@ -29,9 +34,10 @@ Build our own open-source terminal coding agent (a Claude Code–style CLI) usin
 
 ## Open questions
 
-1. Fork OpenCode vs. build our own harness (and in which language)?
-2. Target user hardware (decides default model size)?
+1. Product name (the fork must be rebranded).
+2. Launch GPU provider (Modal vs RunPod) and monthly hosting budget.
 3. Budget / credits for the RL phase?
+4. Frontend framework (React vs Svelte) for the web app.
 
 ## Working conventions
 
