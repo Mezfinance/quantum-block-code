@@ -10,6 +10,7 @@ Build our own open-source terminal coding agent (a Claude Code–style CLI) usin
 
 - Repo was empty; the first commit adds research only. No code yet.
 - Research report: `docs/research/01-open-source-coding-agent.md`
+- Commercial licensing check: `docs/research/02-commercial-licensing.md`. **The product will be sold**, so every component must allow commercial use.
 
 ## Key decisions so far (from the research)
 
@@ -23,6 +24,8 @@ Build our own open-source terminal coding agent (a Claude Code–style CLI) usin
 - Only MIT / Apache-2.0 / BSD / CC BY dependencies, models and datasets unless the team explicitly approves otherwise.
 - Never copy Claude Code's proprietary source, prompts or branding; never use the "Claude" name for the product.
 - Never train on outputs from Claude or other closed models (their terms forbid building competing models from outputs).
+- Commercial blocklist: **Devstral 2 (123B)** (licence ends above $20M monthly revenue; Devstral *Small* 2 is fine), **CoderForge-Preview** (no licence published), anything non-commercial, Llama-style or GPL/AGPL. Kimi K2 needs approval (UI attribution clause at scale).
+- Pin model/dataset revision hashes and keep `THIRD_PARTY_NOTICES` and `DATA_LICENSES.md` up to date once code exists.
 
 ## Open questions
 

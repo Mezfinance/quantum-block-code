@@ -19,6 +19,8 @@
 | Inference | **Local first** (Ollama / llama.cpp / vLLM on our own hardware); free cloud APIs as optional fallbacks | MIT / Apache-2.0 | The only option that is free forever; free API tiers change without notice |
 | Training compute | **Kaggle** (~30 GPU-hrs/week T4/P100) for small LoRA runs; rented GPUs for anything 24B+ | — | Free tiers are fine for experiments but cannot train frontier-scale models |
 
+**Commercial use:** see `02-commercial-licensing.md`. CoderForge-Preview has no published licence, and Devstral 2 (123B) has a revenue cap, so both are excluded for a product we sell.
+
 **Licensing rule for the whole project:** only take dependencies under MIT, Apache-2.0, BSD or CC BY. Avoid "modified MIT" and custom model licenses (e.g. Kimi's) unless we read the terms first.
 
 ---
